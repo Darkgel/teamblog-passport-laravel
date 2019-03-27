@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\DbPassport;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -10,6 +10,10 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
+
+    protected $connection = 'db_passport';
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
