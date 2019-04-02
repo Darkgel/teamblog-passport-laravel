@@ -66,4 +66,23 @@ class RoleController extends V1Controller
     public function delete(){
 
     }
+
+    public function saveWithPermissions(RoleRepository $roleRepository, Request $request){
+        try{
+            // 校验数据有效性
+            $postData = $request->post();
+
+            $role = $roleRepository->saveWithPermissions($postData);
+
+            if(!is_null($role)){//业务逻辑执行成功
+                return $this->response->item($role, new RoleTransformer());
+            }else{
+                throw new BusinessException(ErrorCode::BUSINESS_SERVER_ERROR);
+            }
+
+        } catch (BusinessException $e) {
+            return $this->response->array($e->getExtra())
+                ->header(self::BUSINESS_STATUS_HEADER, [$e->getCode(), $e->getMessage()]);
+        }
+    }
 }

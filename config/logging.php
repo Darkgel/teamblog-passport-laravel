@@ -37,7 +37,6 @@ return [
         'stack' => [
             'driver' => 'stack',
             'channels' => ['daily'],
-            'ignore_exceptions' => false,
         ],
 
         'single' => [
@@ -88,6 +87,20 @@ return [
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => 'debug',
+        ],
+
+        'sql' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/sql/sql.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        'request' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/request/request.log'),
+            'level' => 'debug',
+            'days' => 14,
         ],
     ],
 

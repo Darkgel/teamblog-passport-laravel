@@ -21,6 +21,14 @@ $api->version('v1', ['namespace' => 'App\Api\Controllers\V1', 'middleware' => ['
             $api->get('/', 'RoleController@index');
             $api->get('{id}', 'RoleController@detail');
             $api->post('/', 'RoleController@save');
+            $api->post('/with-permissions', 'RoleController@saveWithPermissions');
+        });
+
+        $api->group(['prefix' => 'users'], function (Router $api){
+            $api->get('/', 'UserController@index');
+            $api->get('{id}', 'UserController@detail');
+            $api->post('/', 'UserController@save');
+            $api->post('/with-authorization', 'UserController@saveWithAuthorization');
         });
     });
 });
