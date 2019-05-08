@@ -31,4 +31,8 @@ $api->version('v1', ['namespace' => 'App\Api\Controllers\V1', 'middleware' => ['
             $api->post('/with-authorization', 'UserController@saveWithAuthorization');
         });
     });
+
+    $api->group(['prefix' => 'tmp'], function (Router $api){
+        $api->get('user', 'TmpController@testUser');
+    });
 });

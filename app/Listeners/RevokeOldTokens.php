@@ -15,7 +15,7 @@ class RevokeOldTokens
      */
     public function handle(AccessTokenCreated $event)
     {
-        \DB::connection('db_blog')->table('oauth_access_tokens')
+        \DB::connection('db_passport')->table('oauth_access_tokens')
             ->where('id', '<>', $event->tokenId)
             ->where('user_id', $event->userId)
             ->where('client_id', $event->clientId)
