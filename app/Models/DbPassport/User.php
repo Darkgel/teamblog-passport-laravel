@@ -18,6 +18,7 @@ use Laravel\Passport\HasApiTokens;
  * @property \Illuminate\Support\Carbon $updatedAt
  * @property \Illuminate\Support\Carbon $createdAt
  * @property \Illuminate\Support\Carbon $deletedAt
+ * @property integer $type
  */
 class User extends Authenticatable
 {
@@ -26,6 +27,9 @@ class User extends Authenticatable
     protected $connection = 'db_passport';
 
     protected $table = 'users';
+
+    const TYPE_USER = 0;//代表具体用户，默认值
+    const TYPE_CLIENT = 1;//代表某种client
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +67,7 @@ class User extends Authenticatable
         $model->name = '';
         $model->email = '';
         $model->password = '';
+        $model->type = self::TYPE_USER;
 
         return $model;
     }
